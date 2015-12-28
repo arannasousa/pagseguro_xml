@@ -34,7 +34,7 @@ No diretório [**exemplos**](https://github.com/arannasousa/pagseguro_xml/tree/m
 
 ## Pagamento / Checkout
 
-Paga gerar uma solicitação de pagamento/checkout:
+Para gerar uma solicitação de pagamento/checkout:
 
 ```python 
 
@@ -87,7 +87,7 @@ if xmlRequisicao.alertas:
     
 if not xmlRequisicao.alertas:
 
-    # variavei
+    # variaveis
     
     TOKEN_API = u''
     EMAIL_API = u''
@@ -100,13 +100,13 @@ if not xmlRequisicao.alertas:
     
     # iniciando processo de ENVIO e RETORNO à PagSeguro
     ok, retorno = api.checkout_v2(EMAIL_API, TOKEN_API, checkout)
-        # podera acontecer os seguintes retorno:
-        #   
-        # sucesso -> True, instância da classe ClassePagamentoRetornoCheckout
-        #
-        # falha   -> False, instância da classe ClassePagamentoErros (quando o status da requisicao for 400)
-        # falha   -> False, texto (unicode) contendo o motivo do erro
-        #
+    # podera acontecer os seguintes retorno:
+    #   
+    # sucesso -> True, instância da classe ClassePagamentoRetornoCheckout
+    #
+    # falha   -> False, instância da classe ClassePagamentoErros (quando o status da requisicao for 400)
+    # falha   -> False, texto (unicode) contendo o motivo do erro
+    #
     
     if ok:
     
@@ -126,6 +126,14 @@ if not xmlRequisicao.alertas:
             print u'-' * 100
     
         # pegando o CODIGO retornado no XML (ClassePagamentoRetornoCheckout)
+        #   Exemplo da PagSeguro:
+        #
+        #   <?xml version="1.0" encoding="ISO-8859-1"?>  
+        #    <checkout>  
+        #        <code>8CF4BE7DCECEF0F004A6DFA0A8243412</code>     <- este codigo  
+        #        <date>2010-12-02T10:11:28.000-02:00</date>  
+        #    </checkout>
+        #
         CODIGO_REQUISICAO = retorno.code.valor
     
         # gerando a URL para REDIRECIONAMENTO do CLIENTE para efetuar o PAGAMENTO na PagSeguro
@@ -141,7 +149,10 @@ if not xmlRequisicao.alertas:
     
     else:
     
+        # https://pagseguro.uol.com.br/v2/guia-de-integracao/api-de-pagamentos.html#v2-item-api-de-pagamentos-resposta
+        
         # exibindo o erro 
+        
         if hasattr(retorno, u'xml'):
             print u'Motivo do erro:', retorno.xml
         else:
@@ -152,12 +163,62 @@ if not xmlRequisicao.alertas:
 
 ## Notificações
 
-> Aguardando tempo para concluir a documentação
+Consultando uma notificação de transação:
+
+> https://pagseguro.uol.com.br/v3/guia-de-integracao/api-de-notificacoes.html
+
+```python 
+
+
+from pagseguro_xml.notificacao import ApiPagSeguroNotificacao_v3, CONST_v3
+
+# variaveis
+TOKEN_API = u''
+EMAIL_API = u''
+
+CHAVE_NOTIFICACAO = u''
+
+# se nao informado, por padrão, ambiente é SANDBOX
+api = ApiPagSeguroNotificacao_v3(ambiente=CONST_v3.AMBIENTE.SANDBOX)
+
+# consultando a TRANSACAO através da chave_de_notificacao
+ok, retorno = api.consulta_notificacao_transacao_v3(EMAIL_API, TOKEN_API, CHAVE_NOTIFICACAO)
+
+# podera acontecer os seguintes retorno:
+#   
+# sucesso -> True, instância da classe ClasseNotificacaoTransacao
+# falha   -> False, texto (unicode) contendo o motivo do erro
+#
+
+if ok:
+    
+    print u'-' * 45, u'RESPOSTA', u'-' * 45
+    # visualizando o XML retornado
+    print retorno.xml
+    print u'-' * 100
+
+    # checando erros no XML retornado
+    if retorno.alertas:
+
+        print u'-' * 45, u'ALERTAS', u'' * 46
+
+        for a in retorno.alertas:
+            print a
+
+        print u'-' * 100
+
+else:
+    print u'Motivo do erro:', retorno
+
+```
 
 
 ## Consultas
 
 > Aguardando tempo para concluir a documentação
+
+
+### Consulta - DETALHES
 
 
 ## Assinaturas
