@@ -1,0 +1,5 @@
+pytz
+requests
+
+# easy_install no windows resolve
+lxml
