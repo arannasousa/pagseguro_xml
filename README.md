@@ -1,7 +1,9 @@
-# pagseguro_xml
+pagseguro_xml
+==========================
+
 API do PagSeguro, em python, através de XML gerado por classes 
 
-Instalando
+#Instalando
 ==========================
 
 ```bash
@@ -17,8 +19,7 @@ pip install -r dependencias.txt
 python setup.py install
 ```
 
-Se houver problemas com o lxml
-=================
+## Se houver problemas com o lxml
 
 Caso encontre problemas na instalação do **lxml** pelo `pip`, tente usar o `easy_install`
 
@@ -27,13 +28,13 @@ easy_install lxml
 ```
 
 Como usar
-=========
+==========================
 
 ### Exemplos
 
-No diretório **exemplos** possui arquivos com os testes para cada API (pagamento, assinatura, consultas, notificacao) com suas opções de requisição.
+No diretório [**exemplos**](https://github.com/arannasousa/pagseguro_xml/tree/master/exemplos) possui arquivos com os testes para cada API (pagamento, assinatura, consultas, notificacao) com suas opções de requisição.
 
-### Pagamento / Checkout
+## Pagamento / Checkout
 
 Paga gerar uma solicitação de pagamento/checkout:
 
@@ -151,17 +152,17 @@ else:
 ```
 
 
-# Notificações
+## Notificações
 
 > Aguardando tempo para concluir a documentação
 
 
-# Consultas
+## Consultas
 
 > Aguardando tempo para concluir a documentação
 
 
-# Assinaturas
+## Assinaturas
 
 > Aguardando tempo para concluir a documentação
 
