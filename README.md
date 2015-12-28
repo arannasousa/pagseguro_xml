@@ -4,7 +4,6 @@ pagseguro_xml
 API do PagSeguro, em python, através de XML gerado por classes 
 
 #Instalando
-==========================
 
 ```bash
 pip install -e git+https://github.com/arannasousa/pagseguro_xml#egg=pagseguro_xml
@@ -27,8 +26,9 @@ Caso encontre problemas na instalação do **lxml** pelo `pip`, tente usar o `ea
 easy_install lxml
 ```
 
+
 Como usar
-==========================
+
 
 ### Exemplos
 
