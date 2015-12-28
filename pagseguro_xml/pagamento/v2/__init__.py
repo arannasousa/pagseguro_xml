@@ -22,14 +22,14 @@ class CONST(object):
     URL_PAGAMENTO_FLUXO_V2 = u'https://{ambiente}pagseguro.uol.com.br/v2/checkout/payment.html?code={codigo_pagamento}'
 
 
-class ApiPagSeguroConsulta(object):
+class ApiPagSeguroPagamento(object):
     def __init__(self, ambiente=CONST.AMBIENTE.SANDBOX):
         assert ambiente in CONST.AMBIENTE._resolve_.keys(), \
             u'parametro "ambiente" deve conter um dos seguintes valores: [%s]' % u', '.join(
             CONST.AMBIENTE._resolve_.keys()
         )
 
-        super(ApiPagSeguroConsulta, self).__init__()
+        super(ApiPagSeguroPagamento, self).__init__()
 
         from ...core import api_pagseguro_request
 

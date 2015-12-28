@@ -1,8 +1,8 @@
 # coding=utf-8
-"""
-Desenvolvedor:	asantos
-E-mail:			Arannã Sousa Santos
-Mês:			12
-Ano:			2015
-Empresa:		TINS - SOLUCOES CORPORATIVAS
-"""
+# ---------------------------------------------------------------
+# Desenvolvedor:    Arannã Sousa Santos
+# Mês:              12
+# Ano:              2015
+# Projeto:          pagseguro_xml
+# e-mail:           asousas@live.com
+# ---------------------------------------------------------------

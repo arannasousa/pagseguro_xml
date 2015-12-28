@@ -8,7 +8,7 @@
 # ---------------------------------------------------------------
 import logging
 
-from pagseguro_xml.pagamento import ApiPagSeguroConsulta_v2, CONST_v2
+from pagseguro_xml.pagamento import ApiPagSeguroPagamento_v2, CONST_v2
 
 logger = logging.basicConfig(level=logging.DEBUG)
 
@@ -19,14 +19,13 @@ PAGSEGURO_API_TOKEN_PRODUCAO = u''
 PAGSEGURO_API_TOKEN_SANDBOX = u''
 
 
-api = ApiPagSeguroConsulta_v2(ambiente=CONST_v2.AMBIENTE.SANDBOX)
+api = ApiPagSeguroPagamento_v2(ambiente=CONST_v2.AMBIENTE.SANDBOX)
 PAGSEGURO_API_TOKEN = PAGSEGURO_API_TOKEN_SANDBOX
 
 
 def exemploCheckout():
 
-    from pagseguro_xml.pagamento.v2.classes import ClassePagamentoCheckout, Item
-    from pagseguro_xml.pagamento.v2.classes.pagamento import CONST as CONST_PAGAMENTO
+    from pagseguro_xml.pagamento.v2.classes.pagamento import CONST as CONST_PAGAMENTO, ClassePagamentoCheckout, Item
 
     xmlRequisicao = ClassePagamentoCheckout()
 
@@ -53,7 +52,6 @@ def exemploCheckout():
     item1.ID.valor = u'ITEM0001'
     item1.description.valor = u'Notebook hehe'
     item1.amount.valor = u'2345.67'
-    # item1.quantity.valor = u'1.0'
     item1.quantity.valor = 1
     item1.weight.valor = 1000       # peso em gramas
 
@@ -105,10 +103,10 @@ def exemploCheckout():
             REDIRECIONAMENTO=u'http://seusite.com.br/?code=CODIGO_NOTIFICACAO'
 
         else:
-            if type(retorno) in (str, unicode, basestring):
-                print u'Motivo do erro:', retorno
-            else:
+            if hasattr(retorno, u'xml'):
                 print u'Motivo do erro:', retorno.xml
+            else:
+                print u'Motivo do erro:', retorno
 
 print u'*' * 100
 exemploCheckout()
