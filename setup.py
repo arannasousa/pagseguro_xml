@@ -12,9 +12,9 @@ import os
 import sys
 
 try:
-    from setuptools import setup
+    from setuptools import setup, find_packages
 except ImportError:
-    from distutils.core import setup
+    from distutils.core import setup, find_packages
 
 if sys.argv[-1] == 'publish':
     os.system('python setup.py sdist upload')
@@ -25,20 +25,18 @@ requirements = ['requests', 'pytz', 'lxml']
 
 setup(
     name='pagseguro_xml',
-    version='0.0.1.dev0',
-    description='Pagseguro API v2 e v3',
+    version='0.0.1.b1',
+    description='API Pagseguro v2 e v3',
     author='Aranna Sousa Santos',
     author_email='asousas@live.com',
     url='https://github.com/arannasousa/pagseguro_xml',
-    packages=[
-        'pagseguro_xml',
-    ],
+    packages=find_packages(exclude=['exemplos', 'tests']),
     package_dir={'pagseguro_xml': 'pagseguro_xml'},
     install_requires=requirements,
     license='GNU GENERAL PUBLIC LICENSE',
     zip_safe=False,
     classifiers=[
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 4 - Beta',
         'Environment :: Web Environment',
         'Intended Audience :: Developers',
         'Natural Language :: Portuguese BR',
