@@ -421,15 +421,35 @@ Essa API é composta por 6 chamadas:
 > http://download.uol.com.br/pagseguro/docs/pagseguro-assinatura-automatica.pdf
 
 1. **[Requisitando uma assinatura](https://github.com/arannasousa/pagseguro_xml#1-requisitando-uma-assinatura):** processo em que será gerado um código para o cliente ser redirecionado para a PagSeguro e finalizar a compra. No final da compra, a PagSeguro irá notificar o seu sistema enviando um CODIGO de ASSINATURA (semelhante ao CODIGO de TRANSACAO - API de Pagamentos).
-2. **Cancelando uma assinatura:** processo em que uma assinatura será cancelada.
+2. **[Cancelando uma assinatura]():** processo em que uma assinatura será cancelada.
 
-3. **Consultando uma assinatura através do código de *notificação*:** Esta consulta deve ser utilizada para consultar uma notificação recebida a fim de obter os dados da assinatura.
-4. **Consultando uma assinatura através do código de *assinatura*:** Esta consulta possibilita o acesso a todos os dados de uma assinatura a partir de seu código identificador.
+3. **[Consultando uma assinatura através do código de *notificação*]():** Esta consulta deve ser utilizada para consultar uma notificação recebida a fim de obter os dados da assinatura.
+4. **[Consultando uma assinatura através do código de *assinatura*]():** Esta consulta possibilita o acesso a todos os dados de uma assinatura a partir de seu código identificador.
 
-5. **Consultando todas as assinaturas, *por dias*, que geraram alguma *notificação*:** Permite o acesso aos dados de todas as assinaturas que tiveram algum tipo de notificação dentro de um intervalo de tempo (em dias) definido.
-6. **Consultando todas assinaturas, por dias, através do código de *assinatura*:** Obtém os dados das assinaturas dado um **intervalo de datas**.
+5. **[Consultando todas as assinaturas, *por dias*, que geraram alguma *notificação*]():** Permite o acesso aos dados de todas as assinaturas que tiveram algum tipo de notificação dentro de um intervalo de tempo (em dias) definido.
+6. **[Consultando todas assinaturas, por dias, através do código de *assinatura*]():** Obtém os dados das assinaturas dado um **intervalo de datas**.
 
 
 ### 1. Requisitando uma assinatura
 
+> tempo para gerar a documentacao
 
+### 2. Cancelando uma assinatura
+
+> tempo para gerar a documentacao
+
+### 3. Consultando uma assinatura através do código de *notificação*
+
+> tempo para gerar a documentacao
+
+### 4. Consultando uma assinatura através do código de *assinatura*
+
+> tempo para gerar a documentacao
+
+### 5. Consultando todas as assinaturas, *por dias*, que geraram alguma *notificação*
+
+> tempo para gerar a documentacao
+
+### 6. Consultando todas assinaturas, por dias, através do código de *assinatura*
+
+> tempo para gerar a documentacao
