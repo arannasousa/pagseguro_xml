@@ -420,7 +420,7 @@ Essa API é composta por 6 chamadas:
 
 > http://download.uol.com.br/pagseguro/docs/pagseguro-assinatura-automatica.pdf
 
-1. **Requisitando uma assinatura:** processo em que será gerado um código para o cliente ser redirecionado para a PagSeguro e finalizar a compra. No final da compra, a PagSeguro irá notificar o seu sistema enviando um CODIGO de ASSINATURA (semelhante ao CODIGO de TRANSACAO - API de Pagamentos).
+1. **(Requisitando uma assinatura)[#1.-Requisitando-uma-assinatura]:** processo em que será gerado um código para o cliente ser redirecionado para a PagSeguro e finalizar a compra. No final da compra, a PagSeguro irá notificar o seu sistema enviando um CODIGO de ASSINATURA (semelhante ao CODIGO de TRANSACAO - API de Pagamentos).
 2. **Cancelando uma assinatura:** processo em que uma assinatura será cancelada.
 
 3. **Consultando uma assinatura através do código de *notificação*:** Esta consulta deve ser utilizada para consultar uma notificação recebida a fim de obter os dados da assinatura.
@@ -429,5 +429,7 @@ Essa API é composta por 6 chamadas:
 5. **Consultando todas as assinaturas, *por dias*, que geraram alguma *notificação*:** Permite o acesso aos dados de todas as assinaturas que tiveram algum tipo de notificação dentro de um intervalo de tempo (em dias) definido.
 6. **Consultando todas assinaturas, por dias, através do código de *assinatura*:** Obtém os dados das assinaturas dado um **intervalo de datas**.
 
+
+### 1. Requisitando uma assinatura
 
 
