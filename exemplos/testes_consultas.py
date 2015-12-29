@@ -59,7 +59,7 @@ def exemploHistorico():
         print retorno.xml
         print u'-' * 50
 
-        for transacao in retorno.transactions:
+        for i, transacao in enumerate(retorno.transactions, start=1):
             print transacao.xml
 
         for a in retorno.alertas:
