@@ -102,10 +102,10 @@ if not xmlRequisicao.alertas:
     ok, retorno = api.checkout_v2(EMAIL_API, TOKEN_API, checkout)
     # podera acontecer os seguintes retorno:
     #   
-    # sucesso -> True, instância da classe ClassePagamentoRetornoCheckout
+    # sucesso -> (True, instância da classe ClassePagamentoRetornoCheckout)
     #
-    # falha   -> False, instância da classe ClassePagamentoErros (quando o status da requisicao for 400)
-    # falha   -> False, texto (unicode) contendo o motivo do erro
+    # falha   -> (False, instância da classe ClassePagamentoErros (quando o status da requisicao for 400))
+    # falha   -> (False, texto (unicode) contendo o motivo do erro)
     #
     
     if ok:
@@ -186,8 +186,8 @@ ok, retorno = api.consulta_notificacao_transacao_v3(EMAIL_API, TOKEN_API, CHAVE_
 
 # podera acontecer os seguintes retorno:
 #   
-# sucesso -> True, instância da classe ClasseNotificacaoTransacao
-# falha   -> False, texto (unicode) contendo o motivo do erro
+# sucesso -> (True, instância da classe ClasseNotificacaoTransacao)
+# falha   -> (False, texto (unicode) contendo o motivo do erro)
 #
 
 if ok:
@@ -241,8 +241,8 @@ ok, retorno = api.detalhes_v3(EMAIL_API, TOKEN_API, CODIGO_TRANSACAO)
 #
 # podera acontecer os seguintes retorno:
 #   
-# sucesso -> True, instância da classe ClasseTransacaoDetalhes
-# falha   -> False, texto (unicode) contendo o motivo do erro
+# sucesso -> (True, instância da classe ClasseTransacaoDetalhes)
+# falha   -> (False, texto (unicode) contendo o motivo do erro)
 #
 
 if ok:
@@ -309,8 +309,8 @@ ok, retorno = api.historico_v2(EMAIL_API, TOKEN_API, data_inicia, data_final)
 #
 # podera acontecer os seguintes retorno:
 #   
-# sucesso -> True, instância da classe ClasseTransacaoHistorico
-# falha   -> False, texto (unicode) contendo o motivo do erro
+# sucesso -> (True, instância da classe ClasseTransacaoHistorico)
+# falha   -> (False, texto (unicode) contendo o motivo do erro)
 #
 
 if ok:
@@ -380,8 +380,8 @@ ok, retorno = api.abandonadas_v2(EMAIL_API, TOKEN_API, data_inicia, data_final)
 #
 # podera acontecer os seguintes retorno:
 #   
-# sucesso -> True, instância da classe ClasseTransacaoAbandonadas
-# falha   -> False, texto (unicode) contendo o motivo do erro
+# sucesso -> (True, instância da classe ClasseTransacaoAbandonadas)
+# falha   -> (False, texto (unicode) contendo o motivo do erro)
 #
 
 if ok:
