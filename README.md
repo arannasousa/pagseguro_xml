@@ -973,6 +973,6 @@ else:
 
 Apesar de todas as funcionalidades, ainda restam algumas pendências:
 
-a) implementar a tag METADATA no xml de pagamento.
+a) implementar a tag [METADATA](https://pagseguro.uol.com.br/v2/guia-de-integracao/api-de-pagamentos.html#v2-item-api-de-pagamentos-parametros-api) no xml de pagamento.
 
-b) implementar o checkout do pagamento para a versão 2.
+b) implementar a requisição dos detalhes da transação para a [versão 2](https://pagseguro.uol.com.br/v2/guia-de-integracao/consulta-de-transacoes-por-codigo.html).
