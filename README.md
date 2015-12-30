@@ -974,4 +974,5 @@ else:
 Apesar de todas as funcionalidades, ainda restam algumas pendências:
 
 a) implementar a tag METADATA no xml de pagamento.
+
 b) implementar o checkout do pagamento para a versão 2.
