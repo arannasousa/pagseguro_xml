@@ -435,8 +435,8 @@ Essa API é composta por 6 chamadas:
 2. **[Consultando uma assinatura através do código de *notificação*](https://github.com/arannasousa/pagseguro_xml#2-consultando-uma-assinatura-atrav%C3%A9s-do-c%C3%B3digo-de-notifica%C3%A7%C3%A3o):** Esta consulta deve ser utilizada para consultar uma notificação recebida a fim de obter os dados da assinatura (de forma resumida).
 3. **[Consultando uma assinatura através do código de *assinatura*](https://github.com/arannasousa/pagseguro_xml#3-consultando-uma-assinatura-atrav%C3%A9s-do-c%C3%B3digo-de-assinatura):** Esta consulta possibilita o acesso a todos os dados de uma assinatura a partir de seu código identificador.
 
-4. **[Consultando todas as assinaturas, *por dias*, que geraram alguma *notificação*](https://github.com/arannasousa/pagseguro_xml#4-consultando-todas-as-assinaturas-por-dias-que-geraram-alguma-notifica%C3%A7%C3%A3o):** Permite o acesso aos dados de todas as assinaturas que tiveram algum tipo de notificação dentro de um intervalo de tempo (em dias) definido.
-5. **[Consultando todas as assinaturas, por intervalo de *datas*](https://github.com/arannasousa/pagseguro_xml#5-consultando-todas-assinaturas-por-dias-por-intervalo-de-datas):** Obtém os dados das assinaturas dado um **intervalo de datas**.
+4. **[Consultando todas as assinaturas, *por dias*, que geraram alguma *notificação*](https://github.com/arannasousa/pagseguro_xml#4-consultando-todas-as-assinaturas-por-dias-que-geraram-alguma-notifica%C3%A7%C3%A3o-assinatura-resumida):** Permite o acesso aos dados de todas as assinaturas que tiveram algum tipo de notificação dentro de um intervalo de tempo (em dias) definido.
+5. **[Consultando todas as assinaturas, por intervalo de *datas*](https://github.com/arannasousa/pagseguro_xml#5-consultando-todas-as-assinaturas-por-intervalo-de-datas-assinatura-resumida):** Obtém os dados das assinaturas dado um **intervalo de datas**.
 
 6. **[Cancelando uma assinatura](https://github.com/arannasousa/pagseguro_xml#6-cancelando-uma-assinatura):** processo em que uma assinatura será cancelada.
 
