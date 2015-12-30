@@ -24,7 +24,7 @@ readme = open('README.md').read()
 
 setup(
     name='pagseguro_xml',
-    version='0.0.1.b1',
+    version='0.0.1',
     description='API PagSeguro v2 e v3 em XML',
     author='Aranna Sousa Santos',
     author_email='asousas@live.com',
