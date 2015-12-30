@@ -25,6 +25,7 @@ class CONST(CONST_BASE):
         CANCELLED_BY_RECEIVER = u'CANCELLED_BY_RECEIVER'
         CANCELLED_BY_SENDER = u'CANCELLED_BY_SENDER'
         EXPIRED = u'EXPIRED'
+        OK = u'OK'
         opcoes = {
             PENDING: u'Assinatura pendente. Aguardando confimação pela operadora',
             ACTIVE: u'Assinatura paga e confirmada pela operadora',
@@ -32,6 +33,7 @@ class CONST(CONST_BASE):
             CANCELLED_BY_RECEIVER: u'Assinatura cancelada por solicitação do vendedor',
             CANCELLED_BY_SENDER: u'Assinatura cancelada por solicitação do comprador',
             EXPIRED: u'Assinatura expirou',
+            OK: u'Assinatura cancelada',
         }
 
 

@@ -77,7 +77,7 @@ checkout.items.append(item1)
     
 if xmlRequisicao.alertas:
 
-    print u'-' * 45, u'ALERTAS', u'' * 46
+    print u'-' * 45, u'ALERTAS', u'-' * 46
 
     for a in checkout.alertas:
         print a
@@ -100,6 +100,7 @@ if not xmlRequisicao.alertas:
     
     # iniciando processo de ENVIO e RETORNO à PagSeguro
     ok, retorno = api.checkout_v2(EMAIL_API, TOKEN_API, checkout)
+    #
     # podera acontecer os seguintes retorno:
     #   
     # sucesso -> (True, instância da classe ClassePagamentoRetornoCheckout)
@@ -118,7 +119,7 @@ if not xmlRequisicao.alertas:
         # checando erros no XML retornado
         if retorno.alertas:
     
-            print u'-' * 45, u'ALERTAS', u'' * 46
+            print u'-' * 45, u'ALERTAS', u'-' * 46
     
             for a in retorno.alertas:
                 print a
@@ -152,7 +153,16 @@ if not xmlRequisicao.alertas:
         # https://pagseguro.uol.com.br/v2/guia-de-integracao/api-de-pagamentos.html#v2-item-api-de-pagamentos-resposta
         
         # exibindo o erro 
-        
+        #
+        # exibindo o erro 
+        #
+        #   caso seja um XML - retorna codigos de erros nos dados enviados
+        #
+        # Existe uma lista de erros na CONST dentro de:
+        #
+        #   pagseguro_xml.pagamento.v2.classes.erros.CONST.CODE
+        #   pagseguro_xml.pagamento.v2.classes.erros.CONST.opcoes [dict contendo os CODIGOS e o TEXTO do erro]
+        #
         if hasattr(retorno, u'xml'):
             print u'Motivo do erro:', retorno.xml
         else:
@@ -200,7 +210,7 @@ if ok:
     # checando erros no XML retornado
     if retorno.alertas:
 
-        print u'-' * 45, u'ALERTAS', u'' * 46
+        print u'-' * 45, u'ALERTAS', u'-' * 46
 
         for a in retorno.alertas:
             print a
@@ -260,7 +270,7 @@ if ok:
     # checando erros no XML retornado
     if retorno.alertas:
 
-        print u'-' * 45, u'ALERTAS', u'' * 46
+        print u'-' * 45, u'ALERTAS', u'-' * 46
 
         for a in retorno.alertas:
             print a
@@ -331,7 +341,7 @@ if ok:
     # checando erros no XML retornado
     if retorno.alertas:
 
-        print u'-' * 45, u'ALERTAS', u'' * 46
+        print u'-' * 45, u'ALERTAS', u'-' * 46
 
         for a in retorno.alertas:
             print a
@@ -402,7 +412,7 @@ if ok:
     # checando erros no XML retornado
     if retorno.alertas:
 
-        print u'-' * 45, u'ALERTAS', u'' * 46
+        print u'-' * 45, u'ALERTAS', u'-' * 46
 
         for a in retorno.alertas:
             print a
@@ -421,35 +431,547 @@ Essa API é composta por 6 chamadas:
 > http://download.uol.com.br/pagseguro/docs/pagseguro-assinatura-automatica.pdf
 
 1. **[Requisitando uma assinatura](https://github.com/arannasousa/pagseguro_xml#1-requisitando-uma-assinatura):** processo em que será gerado um código para o cliente ser redirecionado para a PagSeguro e finalizar a compra. No final da compra, a PagSeguro irá notificar o seu sistema enviando um CODIGO de ASSINATURA (semelhante ao CODIGO de TRANSACAO - API de Pagamentos).
-2. **[Cancelando uma assinatura]():** processo em que uma assinatura será cancelada.
 
-3. **[Consultando uma assinatura através do código de *notificação*]():** Esta consulta deve ser utilizada para consultar uma notificação recebida a fim de obter os dados da assinatura.
-4. **[Consultando uma assinatura através do código de *assinatura*]():** Esta consulta possibilita o acesso a todos os dados de uma assinatura a partir de seu código identificador.
+2. **[Consultando uma assinatura através do código de *notificação*](https://github.com/arannasousa/pagseguro_xml#2-consultando-uma-assinatura-atrav%C3%A9s-do-c%C3%B3digo-de-notifica%C3%A7%C3%A3o):** Esta consulta deve ser utilizada para consultar uma notificação recebida a fim de obter os dados da assinatura (de forma resumida).
+3. **[Consultando uma assinatura através do código de *assinatura*](https://github.com/arannasousa/pagseguro_xml#3-consultando-uma-assinatura-atrav%C3%A9s-do-c%C3%B3digo-de-assinatura):** Esta consulta possibilita o acesso a todos os dados de uma assinatura a partir de seu código identificador.
 
-5. **[Consultando todas as assinaturas, *por dias*, que geraram alguma *notificação*]():** Permite o acesso aos dados de todas as assinaturas que tiveram algum tipo de notificação dentro de um intervalo de tempo (em dias) definido.
-6. **[Consultando todas assinaturas, por dias, através do código de *assinatura*]():** Obtém os dados das assinaturas dado um **intervalo de datas**.
+4. **[Consultando todas as assinaturas, *por dias*, que geraram alguma *notificação*](https://github.com/arannasousa/pagseguro_xml#4-consultando-todas-as-assinaturas-por-dias-que-geraram-alguma-notifica%C3%A7%C3%A3o):** Permite o acesso aos dados de todas as assinaturas que tiveram algum tipo de notificação dentro de um intervalo de tempo (em dias) definido.
+5. **[Consultando todas as assinaturas, por intervalo de *datas*](https://github.com/arannasousa/pagseguro_xml#5-consultando-todas-assinaturas-por-dias-por-intervalo-de-datas):** Obtém os dados das assinaturas dado um **intervalo de datas**.
 
+6. **[Cancelando uma assinatura](https://github.com/arannasousa/pagseguro_xml#6-cancelando-uma-assinatura):** processo em que uma assinatura será cancelada.
 
 ### 1. Requisitando uma assinatura
 
-> tempo para gerar a documentacao
+Chamada de **autorização**, é o processo onde o cliente, após escolher o serviço no site é redirecionado para o PagSeguro para efetuar a autorização do débito recorrente em seu cartão de crédito.
 
-### 2. Cancelando uma assinatura
+```python
 
-> tempo para gerar a documentacao
+# variaveis
+TOKEN_API = u''
+EMAIL_API = u'seu@email.com'
 
-### 3. Consultando uma assinatura através do código de *notificação*
+from pagseguro_xml.assinatura.v2.classes.requisicao import ClasseAssinaturaRequisicao, CONST as CONST_REQUISICAO
 
-> tempo para gerar a documentacao
+# montando o XML para a requisição de pagamento na PagSeguro
 
-### 4. Consultando uma assinatura através do código de *assinatura*
+xmlRequisicao = ClasseAssinaturaRequisicao()
 
-> tempo para gerar a documentacao
+# url para redirecionamento, ao final do pagamento, na pagSeguro
+# através dela, será recebido o CODIGO_DE_ASSINATURA
+xmlRequisicao.redirectURL.valor = u'http://seusite.com.br'
 
-### 5. Consultando todas as assinaturas, *por dias*, que geraram alguma *notificação*
+xmlRequisicao.reference.valor = u'REF0002'
 
-> tempo para gerar a documentacao
+xmlRequisicao.sender.name.valor = u'Cliente de teste'
+xmlRequisicao.sender.email.valor = u'as1234231234e@sandbox.pagseguro.com.br'
 
-### 6. Consultando todas assinaturas, por dias, através do código de *assinatura*
+xmlRequisicao.sender.address.state.valor = u'TO'
 
-> tempo para gerar a documentacao
+# cobrança [auto|manual] 
+xmlRequisicao.preApproval.charge.valor = CONST_REQUISICAO.PREAPPROVAL.CHARGE.AUTO
+xmlRequisicao.preApproval.name.valor = u'Assinatura de 1 mes'
+xmlRequisicao.preApproval.amountPerPayment.valor = u'10.00'
+xmlRequisicao.preApproval.period.valor = CONST_REQUISICAO.PREAPPROVAL.PERIOD.MONTHLY
+
+from datetime import datetime
+
+# data final da cobrança 
+xmlRequisicao.preApproval.finalDate.valor = datetime(2016, 01, 23)
+
+# valor total das cobranças até a data de término
+xmlRequisicao.preApproval.maxTotalAmount.valor = u'10.00'
+
+# checa se houve algum erro de informação, se existe campos obrigatórios não preenchidos
+# antes de enviar à WebService da PagSeguro
+if xmlRequisicao.alertas:
+
+    print u'-' * 45, u'ALERTAS', u'-' * 46
+
+    for a in checkout.alertas:
+        print a
+
+    print u'-' * 100
+
+    return u'Falha no esquema'
+
+from pagseguro_xml.assinatura import ApiPagSeguroAssinatura_v2, CONST_v2
+
+# se nao informado, por padrão, o ambiente é SANDBOX
+api = ApiPagSeguroAssinatura_v2(ambiente=CONST_v2.AMBIENTE.SANDBOX)
+
+# gera a solicitacao de pagamento para a assinatura
+ok, retorno = api.requisicao_assinatura_v2(EMAIL_API, TOKEN_API, xmlRequisicao)
+
+#
+# podera acontecer os seguintes retorno:
+#   
+# sucesso -> (True , instância da classe ClasseAssinaturaResposta)
+#
+# falha   -> (False, instância da classe ClasseAssinaturaErros (quando o status da requisicao for 400))
+# falha   -> (False, texto (unicode) contendo o motivo do erro)
+#
+
+if ok:
+    
+    print u'-' * 45, u'RESPOSTA', u'-' * 45
+    # visualizando o XML retornado
+    print retorno.xml
+    print u'-' * 100
+
+    # checando erros no XML retornado
+    if retorno.alertas:
+
+        print u'-' * 45, u'ALERTAS', u'-' * 46
+
+        for a in retorno.alertas:
+            print a
+
+        print u'-' * 100
+
+    # pegando o CODIGO retornado no XML (ClassePagamentoRetornoCheckout)
+    #   Exemplo da PagSeguro:
+    #
+    #   <?xml version="1.0" encoding="ISO-8859-1"?>  
+    #    <preApprovalRequest>  
+    #        <code>8CF4BE7DCECEF0F004A6DFA0A8243412</code>     <- este codigo  
+    #        <date>2010-12-02T10:11:28.000-02:00</date>  
+    #    </preApprovalRequest>
+    #
+    
+    CODIGO_REQUISICAO_PAGAMENTO = retorno.code.valor
+
+    url_fluxo = api.gera_url_fluxo_v2(CODIGO_REQUISICAO_PAGAMENTO)
+    # >> u'https://[sandbox.]pagseguro.uol.com.br/v2/pre-approvals/request.html?code=CODIGO-RETORNADO'
+
+    print u'URL para o fluxo:', url_fluxo
+
+    return redirect(url_fluxo)
+    
+    # --------------------------------------------------------------------------------
+    # no final do pagamento, a PagSeguro vai gerar a URL como a de baixo
+    #
+    # u'http://seusite.com.br/?code=CODIGO-NOTIFICACAO'
+    # --------------------------------------------------------------------------------
+
+else:
+    #
+    # exibindo o erro 
+    #
+    #   caso seja um XML - retorna codigos de erros nos dados enviados
+    #
+    # Existe uma lista de erros na CONST dentro de:
+    #
+    #   pagseguro_xml.assinatura.v2.classes.erros.CONST.CODE
+    #   pagseguro_xml.assinatura.v2.classes.erros.CONST.opcoes [dict contendo os CODIGOS e o TEXTO do erro]
+    #
+    
+    if hasattr(retorno, u'xml'):
+        print u'Motivo do erro:', retorno.xml
+        
+        return u'Motivo do erro: %s' % retorno.xml
+            
+    else:
+        print u'Motivo do erro:', retorno
+        
+        return u'Motivo do erro: %s' % retorno
+    
+```
+
+### 2. Consultando uma assinatura através do código de *notificação*
+
+Esta consulta deve ser utilizada para consultar uma notificação recebida a fim de obter os dados da assinatura.
+
+```python
+
+# variaveis
+TOKEN_API = u''
+EMAIL_API = u'seu@email.com'
+
+# codigo da notificacao recebida pela PagSeguro
+# Ex.:
+# http://seusite.com.br/?code=CODIGO-NOTIFICACAO&notificationType=preApproval
+CODIGO_NOTIFICACAO = u''
+
+from pagseguro_xml.assinatura import ApiPagSeguroAssinatura_v2, CONST_v2
+
+# se nao informado, por padrão, o ambiente é SANDBOX
+api = ApiPagSeguroAssinatura_v2(ambiente=CONST_v2.AMBIENTE.SANDBOX)
+
+# realiza a consulta da ASSINATURA através do codigo de notificacao
+# se sucesso, retorna uma CLASSE que representa o XML
+ok, retorno = api.consulta_assinatura_notificacao_v2(EMAIL_API, TOKEN_API, CODIGO_NOTIFICACAO)
+
+#
+# podera acontecer os seguintes retorno:
+#   
+# sucesso -> (True, instância da classe ClasseConsultaAssinaturaResposta)
+# falha   -> (False, texto (unicode) contendo o motivo do erro)
+#
+
+if ok:
+
+    print u'-' * 45, u'RESPOSTA', u'-' * 45
+    
+    # visualizando o XML retornado
+    print retorno.xml
+    
+    print u'-' * 100
+
+    print u'Status da Assinatura', retorno.status.valor 
+    
+    # checando erros no XML retornado
+    if retorno.alertas:
+
+        print u'-' * 45, u'ALERTAS', u'-' * 46
+
+        for a in retorno.alertas:
+            print a
+
+        print u'-' * 100
+
+else:
+    print u'Motivo do erro:', retorno
+
+```
+
+### 3. Consultando uma assinatura através do código de *assinatura*
+
+Esta consulta possibilita o acesso a todos os dados de uma assinatura a partir de seu código identificador.
+
+```python
+
+# variaveis
+TOKEN_API = u''
+EMAIL_API = u'seu@email.com'
+
+# codigo da assinatura
+CODIGO_ASSINATURA = u''
+
+from pagseguro_xml.assinatura import ApiPagSeguroAssinatura_v2, CONST_v2
+
+# se nao informado, por padrão, o ambiente é SANDBOX
+api = ApiPagSeguroAssinatura_v2(ambiente=CONST_v2.AMBIENTE.SANDBOX)
+
+# realiza a consulta da ASSINATURA através do codigo
+# se sucesso, retorna uma CLASSE que representa o XML
+ok, retorno = api.consulta_assinatura_v2(EMAIL_API, TOKEN_API, CODIGO_NOTIFICACAO)
+
+#
+# podera acontecer os seguintes retorno:
+#   
+# sucesso -> (True, instância da classe ClasseConsultaAssinaturaResposta)
+# falha   -> (False, texto (unicode) contendo o motivo do erro)
+#
+
+if ok:
+
+    print u'-' * 45, u'RESPOSTA', u'-' * 45
+    
+    # visualizando o XML retornado
+    print retorno.xml
+    
+    print u'-' * 100
+
+    print u'Status da Assinatura', retorno.status.valor 
+    
+    # checando erros no XML retornado
+    if retorno.alertas:
+
+        print u'-' * 45, u'ALERTAS', u'-' * 46
+
+        for a in retorno.alertas:
+            print a
+
+        print u'-' * 100
+
+else:
+    print u'Motivo do erro:', retorno
+
+```
+
+### 4. Consultando todas as assinaturas, *por dias*, que geraram alguma *notificação* (assinatura resumida)
+
+Permite o acesso aos dados de todas as assinaturas que tiveram algum tipo de notificação dentro de um intervalo de tempo (em dias) definido.
+
+```python
+
+# variaveis
+TOKEN_API = u''
+EMAIL_API = u'seu@email.com'
+
+# de acordo com a documentacao, o limite maximo é de 30 dias, o mínimo é 1
+DIAS = 30
+
+from pagseguro_xml.assinatura import ApiPagSeguroAssinatura_v2, CONST_v2
+
+# se nao informado, por padrão, o ambiente é SANDBOX
+api = ApiPagSeguroAssinatura_v2(ambiente=CONST_v2.AMBIENTE.SANDBOX)
+
+# checa se houve assinaturas que geraram notificação dentro de X dias
+ok, retorno = api.consulta_notificacao_por_dias_v2(EMAIL_API, TOKEN_API, DIAS)
+
+#
+# podera acontecer os seguintes retorno:
+#   
+# sucesso -> (True , instância da classe ClasseConsultaAssinaturasResposta)
+#
+# falha   -> (False, instância da classe ClasseAssinaturaErros (quando o status da requisicao for 400))
+# falha   -> (False, texto (unicode) contendo o motivo do erro)
+#
+
+if ok:
+    
+    print u'-' * 45, u'RESPOSTA', u'-' * 45
+    # visualizando o XML retornado
+    print retorno.xml
+    print u'-' * 100
+
+    # checando erros no XML retornado
+    if retorno.alertas:
+
+        print u'-' * 45, u'ALERTAS', u'-' * 46
+
+        for a in retorno.alertas:
+            print a
+
+        print u'-' * 100
+
+    print u'Total de ASSINATURAS localizadas:', retorno.resultsInThisPage.valor, len(retorno.preApprovals) 
+    
+    # acessando o STATUS de cada transacao
+    for i, assinatura in enumerate(retorno.preApprovals, start=1):
+            print u' - Assinatura No "%s", STATUS: %s ' % (i, assinatura.status.valor)
+
+    # checando erros no XML retornado
+    if retorno.alertas:
+
+        print u'-' * 45, u'ALERTAS', u'-' * 46
+
+        for a in retorno.alertas:
+            print a
+
+        print u'-' * 100
+
+else:
+    #
+    # exibindo o erro 
+    #
+    #   caso seja um XML - retorna codigos de erros nos dados enviados
+    #
+    # Existe uma lista de erros na CONST dentro de:
+    #
+    #   pagseguro_xml.assinatura.v2.classes.erros.CONST.CODE
+    #   pagseguro_xml.assinatura.v2.classes.erros.CONST.opcoes [dict contendo os CODIGOS e o TEXTO do erro]
+    #
+    
+    if hasattr(retorno, u'xml'):
+        print u'Motivo do erro:', retorno.xml
+        
+        return u'Motivo do erro: %s' % retorno.xml
+            
+    else:
+        print u'Motivo do erro:', retorno
+        
+        return u'Motivo do erro: %s' % retorno
+    
+```
+
+### 5. Consultando todas as assinaturas, por intervalo de *datas* (assinatura resumida)
+
+Obtém os dados das assinaturas dado um intervalo de datas.
+
+```python
+
+# variaveis
+TOKEN_API = u''
+EMAIL_API = u'seu@email.com'
+
+from datetime import datetime
+
+# Gera um periodo para consulta
+#
+# Obs.: Cuidado com as limitações da PAGSEGURO
+#
+# 1. 'data_inicial' NÃO pode ser maior que 6 meses, contados de HOJE
+#
+data_inicial = datetime(2015, 12, 9)
+data_final = datetime(2015, 12, 12)
+
+from pagseguro_xml.assinatura import ApiPagSeguroAssinatura_v2, CONST_v2
+
+# se nao informado, por padrão, o ambiente é SANDBOX
+api = ApiPagSeguroAssinatura_v2(ambiente=CONST_v2.AMBIENTE.SANDBOX)
+
+# consulta assinaturas no periodo especificado
+ok, retorno = api.consulta_por_data_v2(EMAIL_API, TOKEN_API, data_inicial, data_final)
+
+#
+# podera acontecer os seguintes retorno:
+#   
+# sucesso -> (True , instância da classe ClasseConsultaAssinaturasResposta)
+#
+# falha   -> (False, instância da classe ClasseAssinaturaErros (quando o status da requisicao for 400))
+# falha   -> (False, texto (unicode) contendo o motivo do erro)
+#
+
+if ok:
+    
+    print u'-' * 45, u'RESPOSTA', u'-' * 45
+    # visualizando o XML retornado
+    print retorno.xml
+    print u'-' * 100
+
+    # checando erros no XML retornado
+    if retorno.alertas:
+
+        print u'-' * 45, u'ALERTAS', u'-' * 46
+
+        for a in retorno.alertas:
+            print a
+
+        print u'-' * 100
+
+    print u'Total de ASSINATURAS localizadas:', retorno.resultsInThisPage.valor, len(retorno.preApprovals) 
+    
+    # acessando o STATUS de cada transacao
+    for i, assinatura in enumerate(retorno.preApprovals, start=1):
+            print u' - Assinatura No "%s", STATUS: %s ' % (i, assinatura.status.valor)
+
+    # checando erros no XML retornado
+    if retorno.alertas:
+
+        print u'-' * 45, u'ALERTAS', u'-' * 46
+
+        for a in retorno.alertas:
+            print a
+
+        print u'-' * 100
+
+else:
+    #
+    # exibindo o erro 
+    #
+    #   caso seja um XML - retorna codigos de erros nos dados enviados
+    #
+    # Existe uma lista de erros na CONST dentro de:
+    #
+    #   pagseguro_xml.assinatura.v2.classes.erros.CONST.CODE
+    #   pagseguro_xml.assinatura.v2.classes.erros.CONST.opcoes [dict contendo os CODIGOS e o TEXTO do erro]
+    #
+    
+    if hasattr(retorno, u'xml'):
+        print u'Motivo do erro:', retorno.xml
+        
+        return u'Motivo do erro: %s' % retorno.xml
+            
+    else:
+        print u'Motivo do erro:', retorno
+        
+        return u'Motivo do erro: %s' % retorno
+    
+```
+
+### 6. Cancelando uma assinatura
+
+É possível solicitar o cancelamento de uma assinatura fazendo uma chamada ao serviço de Cancelamento. 
+Para tanto, basta que a assinatura esteja com o status ATIVO.
+
+```python
+
+# variaveis
+TOKEN_API = u''
+EMAIL_API = u'seu@email.com'
+
+CODIGO_ASSINATURA = u''
+
+from pagseguro_xml.assinatura import ApiPagSeguroAssinatura_v2, CONST_v2
+
+# se nao informado, por padrão, o ambiente é SANDBOX
+api = ApiPagSeguroAssinatura_v2(ambiente=CONST_v2.AMBIENTE.SANDBOX)
+
+# efetua o cancelamento da ASSINATURA
+ok, retorno = api.cancela_v2(EMAIL_API, TOKEN_API, CODIGO_ASSINATURA)
+
+#
+# podera acontecer os seguintes retorno:
+#   
+# sucesso -> (True , instância da classe ClasseCancelamentoAssinaturaRetorno)
+#
+# falha   -> (False, instância da classe ClasseAssinaturaErros (quando o status da requisicao for 400))
+# falha   -> (False, texto (unicode) contendo o motivo do erro)
+#
+
+if ok:
+    
+    print u'-' * 45, u'RESPOSTA', u'-' * 45
+    # visualizando o XML retornado
+    print retorno.xml
+    print u'-' * 100
+
+    # checando erros no XML retornado
+    if retorno.alertas:
+
+        print u'-' * 45, u'ALERTAS', u'-' * 46
+
+        for a in retorno.alertas:
+            print a
+
+        print u'-' * 100
+
+    #
+    # possivel opcoes de status
+    #
+    # PENDING: u'Assinatura pendente. Aguardando confimação pela operadora',
+    # ACTIVE: u'Assinatura paga e confirmada pela operadora',
+    # CANCELLED: u'Assinatura cancelada por não aprovação da PagSeguro u pela operadora',
+    # CANCELLED_BY_RECEIVER: u'Assinatura cancelada por solicitação do vendedor',
+    # CANCELLED_BY_SENDER: u'Assinatura cancelada por solicitação do comprador',
+    # EXPIRED: u'Assinatura expirou',
+    # OK: u'Assinatura cancelada',
+    #
+    
+    from pagseguro_xml.assinatura.v2.classes.cancelamento import CONST as CONST_CANCELAMENTO
+    
+    print u'STATUS do cancelamento:', retorno.status.valor
+    print u'STATUS do cancelamento:', CONST_CANCELAMENTO.STATUS.opcoes.get(retorno.status.valor, u'----')
+    
+    # checando erros no XML retornado
+    if retorno.alertas:
+
+        print u'-' * 45, u'ALERTAS', u'-' * 46
+
+        for a in retorno.alertas:
+            print a
+
+        print u'-' * 100
+
+else:
+    #
+    # exibindo o erro 
+    #
+    #   caso seja um XML - retorna codigos de erros nos dados enviados
+    #
+    # Existe uma lista de erros na CONST dentro de:
+    #
+    #   pagseguro_xml.assinatura.v2.classes.erros.CONST.CODE
+    #   pagseguro_xml.assinatura.v2.classes.erros.CONST.opcoes [dict contendo os CODIGOS e o TEXTO do erro]
+    #
+    
+    if hasattr(retorno, u'xml'):
+        print u'Motivo do erro:', retorno.xml
+        
+        return u'Motivo do erro: %s' % retorno.xml
+            
+    else:
+        print u'Motivo do erro:', retorno
+        
+        return u'Motivo do erro: %s' % retorno
+    
+```
+
+## Implementações pendentes
+
+Apesar de todas as funcionalidades, ainda restam algumas pendências:
+
+a) implementar a tag METADATA no xml de pagamento.
+b) implementar o checkout do pagamento para a versão 2.

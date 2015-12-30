@@ -9,7 +9,7 @@
 
 import logging
 
-from pagseguro_xml.assinatura import ApiPagSeguroConsulta_v2, CONST_v2
+from pagseguro_xml.assinatura import ApiPagSeguroAssinatura_v2, CONST_v2
 
 logger = logging.basicConfig(level=logging.DEBUG)
 
@@ -19,13 +19,14 @@ PAGSEGURO_API_EMAIL = u'seu@email.com'
 PAGSEGURO_API_TOKEN_PRODUCAO = u''
 PAGSEGURO_API_TOKEN_SANDBOX = u''
 
+api = ApiPagSeguroAssinatura_v2(ambiente=CONST_v2.AMBIENTE.SANDBOX)
 
-api = ApiPagSeguroConsulta_v2(ambiente=CONST_v2.AMBIENTE.SANDBOX)
 PAGSEGURO_API_TOKEN = PAGSEGURO_API_TOKEN_SANDBOX
 
 
 def exemploRequisicaoAssinatura():
-    from pagseguro_xml.assinatura.v2.classes import ClasseAssinaturaRequisicao
+
+    from pagseguro_xml.assinatura.v2.classes.requisicao import ClasseAssinaturaRequisicao, CONST as CONST_REQUISICAO
 
     xmlRequisicao = ClasseAssinaturaRequisicao()
 
@@ -37,10 +38,10 @@ def exemploRequisicaoAssinatura():
 
     xmlRequisicao.sender.address.state.valor = u'TO'
 
-    xmlRequisicao.preApproval.charge.valor = u'auto'
+    xmlRequisicao.preApproval.charge.valor = CONST_REQUISICAO.PREAPPROVAL.CHARGE.AUTO
     xmlRequisicao.preApproval.name.valor = u'Assinatura de 1 mes'
     xmlRequisicao.preApproval.amountPerPayment.valor = u'10.00'
-    xmlRequisicao.preApproval.period.valor = u'MONTHLY'
+    xmlRequisicao.preApproval.period.valor = CONST_REQUISICAO.PREAPPROVAL.PERIOD.MONTHLY
     from datetime import datetime
     xmlRequisicao.preApproval.finalDate.valor = datetime(2016, 01, 23)
     xmlRequisicao.preApproval.maxTotalAmount.valor = u'10.00'
@@ -56,26 +57,41 @@ def exemploRequisicaoAssinatura():
 
         if ok:
 
-            print u'-' * 50
+            print u'-' * 45, u'RESPOSTA', u'-' * 45
+            # visualizando o XML retornado
             print retorno.xml
-            print u'-' * 50
+            print u'-' * 100
 
-            for a in retorno.alertas:
-                print a
+            # checando erros no XML retornado
+            if retorno.alertas:
+
+                print u'-' * 45, u'ALERTAS', u'-' * 46
+
+                for a in retorno.alertas:
+                    print a
+
+                print u'-' * 100
+
+            CODIGO_REQUISICAO_PAGAMENTO = retorno.code.valor
+
+            url_fluxo = api.gera_url_fluxo_v2(CODIGO_REQUISICAO_PAGAMENTO)
+            # >> u'https://[sandbox.]pagseguro.uol.com.br/v2/pre-approvals/request.html?code=CODIGO-RETORNADO'
+
+            print u'URL para o fluxo:', url_fluxo
+
+            # --------------------------------------------------------------------------------
+            # no final do pagamento, a PagSeguro vai gerar a URL como a de baixo
+            #
+            # u'http://seusite.com.br/?code=CODIGO-NOTIFICACAO'
+            # --------------------------------------------------------------------------------
 
         else:
-            if type(retorno) in (str, unicode, basestring):
-                print u'Motivo do erro:', retorno
-            else:
+
+            if hasattr(retorno, u'xml'):
                 print u'Motivo do erro:', retorno.xml
+            else:
+                print u'Motivo do erro:', retorno
 
-        CODIGO_REQUISICAO = u'CODIGO-RETORNADO'
-
-        url_fluxo = api.gera_url_fluxo_v2(CODIGO_REQUISICAO)
-        # >> u'https://[sandbox.]pagseguro.uol.com.br/v2/pre-approvals/request.html?code=CODIGO-RETORNADO'
-
-        # no final do pagamento, a PagSeguro vai gerar a URL como a de baixo
-        REDIRECIONAMENTO=u'http://seusite.com.br/?code=CODIGO-NOTIFICACAO'
 
 def exemploConsultaAssinaturaNotificacao():
     CODIGO_NOTIFICACAO = u''
@@ -84,18 +100,27 @@ def exemploConsultaAssinaturaNotificacao():
 
     if ok:
 
-        print u'-' * 50
-        print retorno.xml
-        print u'-' * 50
+        print u'-' * 45, u'RESPOSTA', u'-' * 45
 
-        for a in retorno.alertas:
-            print a
+        # visualizando o XML retornado
+        print retorno.xml
+
+        print u'-' * 100
+
+        print u'Status da Assinatura', retorno.status.valor
+
+        # checando erros no XML retornado
+        if retorno.alertas:
+
+            print u'-' * 45, u'ALERTAS', u'-' * 46
+
+            for a in retorno.alertas:
+                print a
+
+            print u'-' * 100
 
     else:
-        if type(retorno) in (str, unicode, basestring):
-            print u'Motivo do erro:', retorno
-        else:
-            print u'Motivo do erro:', retorno.xml
+        print u'Motivo do erro:', retorno
 
 def exemploConsultaAssinatura():
     # CODIGO_ASSINATURA = u''
@@ -105,18 +130,27 @@ def exemploConsultaAssinatura():
 
     if ok:
 
-        print u'-' * 50
-        print retorno.xml
-        print u'-' * 50
+        print u'-' * 45, u'RESPOSTA', u'-' * 45
 
-        for a in retorno.alertas:
-            print a
+        # visualizando o XML retornado
+        print retorno.xml
+
+        print u'-' * 100
+
+        print u'Status da Assinatura', retorno.status.valor
+
+        # checando erros no XML retornado
+        if retorno.alertas:
+
+            print u'-' * 45, u'ALERTAS', u'-' * 46
+
+            for a in retorno.alertas:
+                print a
+
+            print u'-' * 100
 
     else:
-        if type(retorno) in (str, unicode, basestring):
-            print u'Motivo do erro:', retorno
-        else:
-            print u'Motivo do erro:', retorno.xml
+        print u'Motivo do erro:', retorno
 
 def exemploConsultaNotificacaoPorDias():
 

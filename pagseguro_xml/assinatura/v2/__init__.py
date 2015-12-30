@@ -36,7 +36,7 @@ class CONST(object):
                                 u'{codigo_assinatura}?{parametros}'
 
 
-class ApiPagSeguroConsulta(object):
+class ApiPagSeguroAssinatura(object):
 
     def __init__(self, ambiente=CONST.AMBIENTE.SANDBOX):
         assert ambiente in CONST.AMBIENTE._resolve_.keys(), \
@@ -44,7 +44,7 @@ class ApiPagSeguroConsulta(object):
             CONST.AMBIENTE._resolve_.keys()
         )
 
-        super(ApiPagSeguroConsulta, self).__init__()
+        super(ApiPagSeguroAssinatura, self).__init__()
 
         from ...core import api_pagseguro_request
 

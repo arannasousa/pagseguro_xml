@@ -7,4 +7,4 @@
 # e-mail:           asousas@live.com
 # ---------------------------------------------------------------
 
-from .v2 import ApiPagSeguroConsulta as ApiPagSeguroConsulta_v2, CONST as CONST_v2
+from .v2 import ApiPagSeguroAssinatura as ApiPagSeguroAssinatura_v2, CONST as CONST_v2
