@@ -442,7 +442,7 @@ Essa API é composta por 6 chamadas:
 
 ### 1. Requisitando uma assinatura
 
-Chamada de **autorização**, é o processo onde o cliente, após escolher o serviço no site é redirecionado para o PagSeguro para efetuar a autorização do débito recorrente em seu cartão de crédito.
+Chamada de **autorização**, é o processo onde o cliente, após escolher o serviço no site, é redirecionado para o PagSeguro para efetuar a autorização do débito recorrente em seu cartão de crédito.
 
 ```python
 
