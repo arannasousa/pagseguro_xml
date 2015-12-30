@@ -32,6 +32,18 @@ easy_install lxml
 
 No diretório [**exemplos**](https://github.com/arannasousa/pagseguro_xml/tree/master/exemplos) possui arquivos com os testes para cada API (pagamento, assinatura, consultas, notificacao) com suas opções de requisição.
 
+# Índice
+
+APIs disponíveis:
+
+####1. [Pagamento / Checkout](https://github.com/arannasousa/pagseguro_xml#pagamento--checkout)
+####2. [Notificações](https://github.com/arannasousa/pagseguro_xml#notifica%C3%A7%C3%B5es)
+####3. [Consultas](https://github.com/arannasousa/pagseguro_xml#consultas)
+####4. [Assinaturas](https://github.com/arannasousa/pagseguro_xml#assinaturas)
+
+###5. [Implementações pendentes](https://github.com/arannasousa/pagseguro_xml#implementa%C3%A7%C3%B5es-pendentes)
+
+
 ## Pagamento / Checkout
 
 Para gerar uma solicitação de pagamento/checkout:
