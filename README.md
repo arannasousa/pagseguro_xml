@@ -6,6 +6,12 @@ API do PagSeguro, em python, através de XML gerado por classes. Esquema baseado
 #Instalando
 
 ```bash
+pip install pagseguro_xml
+```
+
+ou
+
+```bash
 pip install -e git+https://github.com/arannasousa/pagseguro_xml#egg=pagseguro_xml
 ```
 
