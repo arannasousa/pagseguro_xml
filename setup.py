@@ -21,18 +21,18 @@ if sys.argv[-1] == 'publish':
     sys.exit()
 
 readme = open('README.md').read()
-requirements = ['requests', 'pytz', 'lxml']
 
 setup(
     name='pagseguro_xml',
-    version='0.0.1',
-    description='API Pagseguro v2 e v3',
+    version='0.0.1.b1',
+    description='API PagSeguro v2 e v3 em XML',
     author='Aranna Sousa Santos',
     author_email='asousas@live.com',
     url='https://github.com/arannasousa/pagseguro_xml',
+    download_url='https://github.com/arannasousa/pagseguro_xml/archive/master.zip',
     packages=find_packages(exclude=['exemplos', 'tests']),
     package_dir={'pagseguro_xml': 'pagseguro_xml'},
-    install_requires=requirements,
+    install_requires=['requests', 'pytz', 'lxml'],
     license='GNU General Public License v2 (GPLv2)',
     zip_safe=False,
     classifiers=[
