@@ -36,10 +36,10 @@ No diretório [**exemplos**](https://github.com/arannasousa/pagseguro_xml/tree/m
 
 APIs disponíveis:
 
-####1. [API Pagamento / Checkout](https://github.com/arannasousa/pagseguro_xml#pagamento--checkout)
-####2. [API Notificações](https://github.com/arannasousa/pagseguro_xml#notifica%C3%A7%C3%B5es)
-####3. [API Consultas](https://github.com/arannasousa/pagseguro_xml#consultas)
-####4. [API Assinaturas](https://github.com/arannasousa/pagseguro_xml#assinaturas)
+#####1. [API Pagamento / Checkout](https://github.com/arannasousa/pagseguro_xml#pagamento--checkout)
+#####2. [API Notificações](https://github.com/arannasousa/pagseguro_xml#notifica%C3%A7%C3%B5es)
+#####3. [API Consultas](https://github.com/arannasousa/pagseguro_xml#consultas)
+#####4. [API Assinaturas](https://github.com/arannasousa/pagseguro_xml#assinaturas)
 
 #####5. [Implementações pendentes](https://github.com/arannasousa/pagseguro_xml#implementa%C3%A7%C3%B5es-pendentes)
 
