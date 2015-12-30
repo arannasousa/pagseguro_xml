@@ -25,7 +25,7 @@ requirements = ['requests', 'pytz', 'lxml']
 
 setup(
     name='pagseguro_xml',
-    version='0.0.1.b1',
+    version='0.0.1',
     description='API Pagseguro v2 e v3',
     author='Aranna Sousa Santos',
     author_email='asousas@live.com',
@@ -33,14 +33,14 @@ setup(
     packages=find_packages(exclude=['exemplos', 'tests']),
     package_dir={'pagseguro_xml': 'pagseguro_xml'},
     install_requires=requirements,
-    license='GNU GENERAL PUBLIC LICENSE',
+    license='GNU General Public License v2 (GPLv2)',
     zip_safe=False,
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Web Environment',
         'Intended Audience :: Developers',
-        'Natural Language :: Portuguese BR',
-        'License :: OSI Approved :: BSD License',
+        'Natural Language :: Portuguese (Brazilian)',
+        'License :: OSI Approved :: GNU General Public License v2 (GPLv2)',
         'Programming Language :: Python',
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.6',
