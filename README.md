@@ -1,7 +1,7 @@
 pagseguro_xml
 ==========================
 
-API do PagSeguro, em python, através de XML gerado por classes. Projeto baseado no esquema proposto no projeto [PySPED](https://github.com/aricaldeira/PySPED).
+API do PagSeguro, em python, através de XML gerado por classes. Esquema baseado no projeto [PySPED](https://github.com/aricaldeira/PySPED).
 
 #Instalando
 
