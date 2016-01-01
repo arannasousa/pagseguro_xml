@@ -93,7 +93,7 @@ checkout.items.append(item1)
 # apos preencher o Checkout, vamos verificar se houve algum erro 
 # como: campos obrigatorios, passaram do limite, opcao nao disponivel, valores incorretos
     
-if xmlRequisicao.alertas:
+if checkout.alertas:
 
     print u'-' * 45, u'ALERTAS', u'-' * 46
 
@@ -103,7 +103,7 @@ if xmlRequisicao.alertas:
     print u'-' * 100
     
     
-if not xmlRequisicao.alertas:
+if not checkout.alertas:
 
     # variaveis
     
