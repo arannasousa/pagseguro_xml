@@ -17,10 +17,11 @@ from ....core.base_classes import (
 class CONST(object):
     class TYPE(object):
         PAGAMENTO = 1
+        ASSINATURA = 11
 
         opcoes = {
             PAGAMENTO: u'A transação foi criada por um comprador fazendo um pagamento.',
-            11: u'Testes',
+            ASSINATURA: u'A transação foi criada através de uma assinatura.',
         }
 
     class STATUS(object):

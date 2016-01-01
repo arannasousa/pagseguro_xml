@@ -1,0 +1,15 @@
+# Comandos para compliar e colocar em produção (pypi)
+
+python setup.py build
+
+# gerar arquivo de egg_info
+python setup.py egg_info
+
+# gerar distribuicoes
+python setup.py sdist bdist_egg bdist_wininst
+
+# registrando o novo egg_info
+python setup.py register -r pypi
+
+# subindo as distribuicoes
+twine upload dist/*

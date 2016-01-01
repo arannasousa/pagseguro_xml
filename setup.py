@@ -20,12 +20,13 @@ if sys.argv[-1] == 'publish':
     os.system('python setup.py sdist upload')
     sys.exit()
 
-readme = open('README.md').read()
+readme = u'API PagSegudo v2 e v3 em XML, baseado no projeto PYSPED'
 
 setup(
     name='pagseguro_xml',
-    version='0.0.1',
+    version='0.0.2',
     description='API PagSeguro v2 e v3 em XML',
+    long_description=readme,
     author='Aranna Sousa Santos',
     author_email='asousas@live.com',
     url='https://github.com/arannasousa/pagseguro_xml',
