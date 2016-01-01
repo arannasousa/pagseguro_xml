@@ -393,7 +393,7 @@ class ClassePagamentoCheckout(XMLAPI):
         self.receiver = Receiver()
 
         self.currency = TagCaracter(nome=u'currency', raiz=u'//checkout', valor=u'BRL')
-        self.reference = TagCaracter(nome=u'reference', raiz=u'//checkout', tamanho_max=200)
+        self.reference = TagCaracter(nome=u'reference', raiz=u'//checkout', tamanho_max=200, obrigatorio=False)
 
         self.extraAmount = TagDecimal(nome=u'extraAmount', raiz=u'//checkout', decimal_digitos=2, obrigatorio=False)
         self.redirectURL = TagCaracter(nome=u'redirectURL', raiz=u'//checkout', obrigatorio=False, tamanho_max=255)

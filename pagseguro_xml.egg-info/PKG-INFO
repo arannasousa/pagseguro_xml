@@ -1,6 +1,6 @@
 Metadata-Version: 1.0
 Name: pagseguro-xml
-Version: 0.0.2
+Version: 0.0.3
 Summary: API PagSeguro v2 e v3 em XML
 Home-page: https://github.com/arannasousa/pagseguro_xml
 Author: Aranna Sousa Santos

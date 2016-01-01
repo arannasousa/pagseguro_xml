@@ -24,7 +24,7 @@ readme = u'API PagSegudo v2 e v3 em XML, baseado no projeto PYSPED'
 
 setup(
     name='pagseguro_xml',
-    version='0.0.2',
+    version='0.0.3',
     description='API PagSeguro v2 e v3 em XML',
     long_description=readme,
     author='Aranna Sousa Santos',
