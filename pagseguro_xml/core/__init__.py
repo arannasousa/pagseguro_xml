@@ -26,7 +26,12 @@ def api_pagseguro_request(url, class_xml_receber, class_xml_enviar=None, erro={}
     xml = None
 
     if hasattr(class_xml_enviar, u'xml'):
-        xml = class_xml_enviar.xml.encode(u'utf-8')
+
+        from unidecode import unidecode
+
+        # para evitar problemas com os acentos, removo todos os acentos
+        xml = unidecode(class_xml_enviar.xml)
+
         content_type = u'application/xml; charset=UTF-8;'
 
         logger.info(

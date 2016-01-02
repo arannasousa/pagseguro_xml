@@ -24,7 +24,7 @@ readme = u'API PagSegudo v2 e v3 em XML, baseado no projeto PYSPED'
 
 setup(
     name='pagseguro_xml',
-    version='0.0.3',
+    version='0.0.3.b0',
     description='API PagSeguro v2 e v3 em XML',
     long_description=readme,
     author='Aranna Sousa Santos',
@@ -33,7 +33,7 @@ setup(
     download_url='https://github.com/arannasousa/pagseguro_xml/archive/master.zip',
     packages=find_packages(exclude=['exemplos', 'tests']),
     package_dir={'pagseguro_xml': 'pagseguro_xml'},
-    install_requires=['requests', 'pytz', 'lxml'],
+    install_requires=['requests', 'pytz', 'unidecode', 'lxml'],
     license='GNU General Public License v2 (GPLv2)',
     zip_safe=False,
     classifiers=[

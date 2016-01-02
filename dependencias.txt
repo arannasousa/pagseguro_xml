@@ -1,5 +1,6 @@
 pytz
 requests
+unidecode
 
 # easy_install no windows resolve
 lxml
