@@ -20,7 +20,7 @@ if sys.argv[-1] == 'publish':
     os.system('python setup.py sdist upload')
     sys.exit()
 
-readme = u'API PagSegudo v2 e v3 em XML, baseado no projeto PYSPED'
+readme = u'API PagSegudo v2 e v3 em XML, baseado no projeto PYSPED.\n\nPossui métodos para consultas, pagamentos e assinaturas.'
 
 setup(
     name='pagseguro_xml',
